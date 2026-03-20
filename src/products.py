@@ -12,6 +12,14 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self):
+        """Метод выводит описание товара в виде строки"""
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        """Метод выводит сумму цен на продукты"""
+        return self.price * self.quantity + other.price * other.quantity
+
     @classmethod
     def new_product(cls, new_product: dict):
         """Метод принимает на вход параметры товара в словаре и возвращает созданный объект класса"""
@@ -50,6 +58,13 @@ class Category:
         Category.product_count = len(self.__products)
         Category.category_count += 1
 
+    def __str__(self):
+        """Метод выводит описание категории в виде строки с количеством товаров в категории"""
+        product_quantity_count = 0
+        for i in self.__products:
+            product_quantity_count += i.quantity
+        return f"{self.name}, количество продуктов: {product_quantity_count} шт."
+
     def add_product(self, new_product: Product):
         """Метод добавляет новый товар в категорию"""
         self.__products.append(new_product)
@@ -60,6 +75,29 @@ class Category:
         """Геттер выводит список товаров в виде строк"""
         product_str = ""
         for product in self.__products:
-            product_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
-
+            product_str += f"{str(product)}\n"
         return product_str
+
+    @property
+    def products_list(self):
+        return self.__products
+
+
+class Iterator:
+    """Класс для перебора продуктов в классе продуктов"""
+
+    def __init__(self, category_obj):
+        self.category = category_obj
+        self.point = 0
+
+    def __iter__(self):
+        self.point = 0
+        return self
+
+    def __next__(self):
+        if self.point < len(self.category.products_list):
+            i = self.category.products_list[self.point]
+            self.point += 1
+            return i
+        else:
+            raise StopIteration

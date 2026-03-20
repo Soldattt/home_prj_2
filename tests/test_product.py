@@ -1,3 +1,5 @@
+import pytest
+
 from src.products import Category, Product
 
 
@@ -52,3 +54,19 @@ def test_new_product():
 
     new_product.price = 0.0
     assert new_product.price == 800.0
+
+
+def test_str(product, category):
+    assert str(product) == "Lenovo Legion 5, 140000.0 руб. Остаток: 3 шт."
+    assert str(category) == "Ноутбуки, количество продуктов: 3 шт."
+
+
+def test_add_product(product_1, product_2):
+    assert product_1 + product_2 == 1240000.0
+
+
+def test_iterator(iterator):
+    assert iterator.point == 0
+    assert next(iterator).name == "Lenovo Legion 5"
+    with pytest.raises(StopIteration):
+        next(iterator)
