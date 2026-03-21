@@ -70,3 +70,14 @@ def test_iterator(iterator):
     assert next(iterator).name == "Lenovo Legion 5"
     with pytest.raises(StopIteration):
         next(iterator)
+
+
+def test_incorrect_product(incorrect_product):
+    category = Category(
+        "Смартфоны",
+        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+        [],
+    )
+    product = "Не продукт"
+    with pytest.raises(TypeError):
+        category.add_product(product)
