@@ -3,6 +3,7 @@ from src.products import Product
 
 class LawnGrass(Product):
     """Дочерний класс от Products, описывающий смартфоны"""
+
     country = str
     germination_period = str
     color = str
@@ -12,7 +13,6 @@ class LawnGrass(Product):
         self.country = country
         self.germination_period = germination_period
         self.color = color
-
 
     def __add__(self, other):
         """Метод выводит сумму цен на продукты, если они являются классом LawnGrass"""
