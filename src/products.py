@@ -67,8 +67,11 @@ class Category:
 
     def add_product(self, new_product: Product):
         """Метод добавляет новый товар в категорию"""
-        self.__products.append(new_product)
-        Category.product_count += 1
+        if isinstance(new_product, Product):
+            self.__products.append(new_product)
+            Category.product_count = len(self.__products)
+        else:
+            raise TypeError
 
     @property
     def products(self):
