@@ -1,4 +1,22 @@
-class Product:
+from abc import ABC, abstractmethod
+from src.print_mixin import PrintMixin
+
+
+
+class BaseProduct(ABC):
+
+    @classmethod
+    @abstractmethod
+    def new_product(cls, *args, **kwargs):
+        pass
+
+    @abstractmethod
+    def __add__(self, *args, **kwargs):
+        pass
+
+
+
+class Product(BaseProduct, PrintMixin):
     """Класс для описания продукта"""
 
     name = str
@@ -11,6 +29,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self):
         """Метод выводит описание товара в виде строки"""
@@ -85,7 +104,6 @@ class Category:
     def products_list(self):
         return self.__products
 
-
 class Iterator:
     """Класс для перебора продуктов в классе продуктов"""
 
@@ -104,3 +122,4 @@ class Iterator:
             return i
         else:
             raise StopIteration
+
