@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from src.print_mixin import PrintMixin
 
+from src.print_mixin import PrintMixin
 
 
 class BaseProduct(ABC):
@@ -13,7 +13,6 @@ class BaseProduct(ABC):
     @abstractmethod
     def __add__(self, *args, **kwargs):
         pass
-
 
 
 class Product(BaseProduct, PrintMixin):
@@ -104,6 +103,7 @@ class Category:
     def products_list(self):
         return self.__products
 
+
 class Iterator:
     """Класс для перебора продуктов в классе продуктов"""
 
@@ -122,4 +122,3 @@ class Iterator:
             return i
         else:
             raise StopIteration
-

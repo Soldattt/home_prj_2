@@ -1,5 +1,6 @@
 class PrintMixin:
     """Класс для описания продуктов"""
+
     def __init__(self):
         print(repr(self))
 
