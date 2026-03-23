@@ -73,7 +73,7 @@ class Category:
         self.name = name
         self.description = description
         self.__products = products if products else []
-        Category.product_count = len(self.__products)
+        Category.product_count += len(products)
         Category.category_count += 1
 
     def __str__(self):
@@ -87,7 +87,7 @@ class Category:
         """Метод добавляет новый товар в категорию"""
         if isinstance(new_product, Product):
             self.__products.append(new_product)
-            Category.product_count = len(self.__products)
+            Category.product_count += 1
         else:
             raise TypeError
 
@@ -105,7 +105,7 @@ class Category:
 
 
 class Iterator:
-    """Класс для перебора продуктов в классе продуктов"""
+    """Класс для перебора продуктов"""
 
     def __init__(self, category_obj):
         self.category = category_obj
