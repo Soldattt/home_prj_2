@@ -81,3 +81,13 @@ def test_incorrect_product(incorrect_product):
     product = "Не продукт"
     with pytest.raises(TypeError):
         category.add_product(product)
+
+
+def test_none_product():
+    with pytest.raises(ValueError):
+        Product(name="Lenovo Legion 5", description="Ryzen 7, Черный цвет, 1 Tb", price=140000.0, quantity=0)
+
+
+def test_middle_price():
+    category_empty = Category("Пустая категория", "Категория без продуктов", [])
+    assert category_empty.middle_price() == 0
